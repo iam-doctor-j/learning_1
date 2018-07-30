@@ -17,23 +17,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        url = findViewById(R.id.editText);
+        sendUrl = findViewById(R.id.button_go);
+        share = findViewById(R.id.button_share);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        url = findViewById(R.id.editText);
-        sendUrl = findViewById(R.id.button_go);
-        share = findViewById(R.id.button_share);
 
-        String urlstr = url.getText().toString();
-        if(!urlstr.startsWith("http")||!urlstr.startsWith("https"))
-            urlstr="http://"+urlstr;
-        final String str = urlstr;
-        final Uri webpage = Uri.parse(urlstr);
         sendUrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String urlstr = url.getText().toString();
+                if(!urlstr.startsWith("http")||!urlstr.startsWith("https"))
+                    urlstr="http://"+urlstr;
+                Uri webpage = Uri.parse(urlstr);
                 Intent intent = new Intent(Intent.ACTION_VIEW,webpage);
                 startActivity(intent);
             }
@@ -42,8 +41,11 @@ public class MainActivity extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String urlstr = url.getText().toString();
+                if(!urlstr.startsWith("http")||!urlstr.startsWith("https"))
+                    urlstr="http://"+urlstr;
                 Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT,str);
+                intent.putExtra(Intent.EXTRA_TEXT,urlstr);
                 intent.setType("text/html");
                 startActivity(intent);
 
