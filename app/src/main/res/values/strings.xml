@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">IntentApplication</string>
+    <string name="url_name">Enter URL</string>
+    <string name="open_url">GO</string>
+</resources>
