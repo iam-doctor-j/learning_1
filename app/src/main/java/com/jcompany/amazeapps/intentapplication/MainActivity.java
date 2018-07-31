@@ -50,6 +50,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        builder.setMessage("Do you want to share?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String urlstr = url.getText().toString();
+                if(!urlstr.startsWith("http")||!urlstr.startsWith("https"))
+                    urlstr="http://"+urlstr;
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,urlstr);
+                intent.setType("text/html");
+                startActivity(intent);
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
         sendUrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
